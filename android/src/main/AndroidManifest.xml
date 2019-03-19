@@ -2,7 +2,7 @@
           package="com.flutter_install.flutter_install">
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
     <application>
-        <provider
+<!--         <provider
                 android:name="androidx.core.content.FileProvider"
                 android:authorities="${applicationId}.fileProvider"
                 android:exported="false"
@@ -10,6 +10,6 @@
             <meta-data
                     android:name="android.support.FILE_PROVIDER_PATHS"
                     android:resource="@xml/provider_paths"/>
-        </provider>
+        </provider> -->
     </application>
 </manifest>
