@@ -17,10 +17,10 @@ import java.io.File
 import java.io.FileNotFoundException
 
 class FlutterInstallPlugin(private val registrar: Registrar): MethodCallHandler {
-  private var apkFile: File? = null
-  private var appId: String? = null
   companion object {
     private const val installRequestCode = 1234
+    public var apkFile: File? = null
+    public var sAppId: String? = null
     @JvmStatic
     fun registerWith(registrar: Registrar) {
       val channel = MethodChannel(registrar.messenger(), "flutter_install")
@@ -32,7 +32,7 @@ class FlutterInstallPlugin(private val registrar: Registrar): MethodCallHandler 
                 "requestCode=$requestCode, resultCode = $resultCode, intent = $intent"
         )
         if (resultCode == Activity.RESULT_OK && requestCode == installRequestCode) {
-          installPlugin.install24(registrar.context(), installPlugin.apkFile, installPlugin.appId)
+          installPlugin.install24(registrar.context(),apkFile, sAppId)
           true
         } else
 
@@ -73,8 +73,8 @@ class FlutterInstallPlugin(private val registrar: Registrar): MethodCallHandler 
       if (canRequestPackageInstalls(activity)) install24(activity, file, appId)
       else {
         showSettingPackageInstall(activity)
-        this.apkFile = file
-        this.appId = appId
+        apkFile = file
+        sAppId = appId
       }
     } else {
       installBelow24(activity, file)
